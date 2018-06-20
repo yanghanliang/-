@@ -1,7 +1,5 @@
 <style lang='less'>
-  page {
-    background-color: #fff;
-  }
+  @import "./style/iconfont.wxss";
 </style>
 <script>
 import wepy from 'wepy'
@@ -18,7 +16,8 @@ export default class extends wepy.app {
       'pages/home',
       'pages/category',
       'pages/cart',
-      'pages/me'
+      'pages/me',
+      'pages/goods_detail'
     ],
     'window': {
       'backgroundTextStyle': 'light',

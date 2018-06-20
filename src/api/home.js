@@ -17,6 +17,9 @@ export async function getNavCats() {
 }
 
 // 获取首页楼层数据
-export function getFollr() {
-	// body...
+export async function getFollr() {
+  const res = await request({
+  	url: 'home/floordata'
+  })
+  return res.data.data
 }

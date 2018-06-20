@@ -5,6 +5,7 @@
         <text class="search-text">搜索</text>
     </view>
     </view>
+    <!-- 轮播图 -->
     <view class="swiper-wrap">
     <swiper
         indicator-dots
@@ -16,7 +17,9 @@
         wx:for="{{ swiperData }}"
         wx:key="item"
         class="swiper-item-img">
-        <image mode="widthFix" src="{{ item.image_src }}"></image>
+          <navigator open-type="{{ item.open_type }}" url="{{ item.navigator_url }}">
+            <image mode="widthFix" src="{{ item.image_src }}"></image>
+          </navigator>
         </swiper-item>
     </swiper>
     </view>
@@ -29,147 +32,66 @@
         </view>
     </view>
     <!-- 楼层导航-start -->
-    <view class="floor">
+    <view class="floor" wx:for="{{ floorData }}" wx:key="index">
       <!-- 标题 -->
       <view class="floor-head">
-        <image class="" src="../upload/pic_floor01_title.png"></image>
+        <image class="" src="{{ item.floor_title.image_src }}"></image>
       </view>
       <!-- 主体 -->
       <view class="floor-body">
         <!-- 左侧大图 -->
         <view class="floor-left">
-          <navigator url="">
-            <image src="../upload/pic_floor01_1@2x.png"></image> 
+          <navigator url="{{ item.product_list[0].navigator_url }}" open-type="{{ item.product_list[0].open_type }}">
+            <image src="{{ item.product_list[0].image_src }}"></image> 
           </navigator>
         </view>
         <!-- 右侧小图 -->
         <view class="floor-right">
-          <navigator url="">
-            <image src="../upload/pic_floor01_2@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_3@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_4@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_5@2x.png"></image> 
+          <navigator
+            wx:for="{{ item.product_list }}"
+            wx:for-item="prod"
+            wx:key="index"
+            url="{{ prod.navigator_url }}"
+            open-type="{{ prod.open_type }}">
+            <image
+              wx:if="{{ index != 0 }}"
+              src="{{ prod.image_src }}"
+              style="width:{{ prod.image_width + 'rpx' }}"></image> 
           </navigator>
         </view>
       </view>
     </view>  
     <!-- 楼层导航-end -->
-    <!-- 楼层导航-start -->
-    <view class="floor">
-      <!-- 标题 -->
-      <view class="floor-head">
-        <image class="" src="../upload/pic_floor01_title.png"></image>
-      </view>
-      <!-- 主体 -->
-      <view class="floor-body">
-        <!-- 左侧大图 -->
-        <view class="floor-left">
-          <navigator url="">
-            <image src="../upload/pic_floor01_1@2x.png"></image> 
-          </navigator>
-        </view>
-        <!-- 右侧小图 -->
-        <view class="floor-right">
-          <navigator url="">
-            <image src="../upload/pic_floor01_2@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_3@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_4@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_5@2x.png"></image> 
-          </navigator>
-        </view>
-      </view>
-    </view>  
-    <!-- 楼层导航-end -->
-    <!-- 楼层导航-start -->
-    <view class="floor">
-      <!-- 标题 -->
-      <view class="floor-head">
-        <image class="" src="../upload/pic_floor01_title.png"></image>
-      </view>
-      <!-- 主体 -->
-      <view class="floor-body">
-        <!-- 左侧大图 -->
-        <view class="floor-left">
-          <navigator url="">
-            <image src="../upload/pic_floor01_1@2x.png"></image> 
-          </navigator>
-        </view>
-        <!-- 右侧小图 -->
-        <view class="floor-right">
-          <navigator url="">
-            <image src="../upload/pic_floor01_2@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_3@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_4@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_5@2x.png"></image> 
-          </navigator>
-        </view>
-      </view>
-    </view>  
-    <!-- 楼层导航-end -->
-    <!-- 楼层导航-start -->
-    <view class="floor">
-      <!-- 标题 -->
-      <view class="floor-head">
-        <image class="" src="../upload/pic_floor01_title.png"></image>
-      </view>
-      <!-- 主体 -->
-      <view class="floor-body">
-        <!-- 左侧大图 -->
-        <view class="floor-left">
-          <navigator url="">
-            <image src="../upload/pic_floor01_1@2x.png"></image> 
-          </navigator>
-        </view>
-        <!-- 右侧小图 -->
-        <view class="floor-right">
-          <navigator url="">
-            <image src="../upload/pic_floor01_2@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_3@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_4@2x.png"></image> 
-          </navigator>
-          <navigator url="">
-            <image src="../upload/pic_floor01_5@2x.png"></image> 
-          </navigator>
-        </view>
-      </view>
-    </view>  
-    <!-- 楼层导航-end -->
+
+    <!-- 返回顶部-start -->
+    <totop></totop>
+    <!-- 返回顶部-end -->
+
+    <!-- 底线-start -->
+    <endline></endline>
+    <!-- 底线-end -->
 </template>
 <script>
 
 import wepy from 'wepy'
 import * as home from '../api/home'
+import toTop from '../components/to-top/index'
+import endLine from '../components/end-line/index'
 
 export default class Cart extends wepy.page {
   data = {
     swiperData: [],
-    catItems: []
+    catItems: [],
+    floorData: []
   };
 
   methods = {
 
+  }
+
+  components = {
+    totop: toTop,     // 置顶
+    endline: endLine  // 底线
   }
 
   // 轮播图
@@ -184,9 +106,15 @@ export default class Cart extends wepy.page {
     this.$apply()
   }
 
+  // 获取楼层数据
+  async loadFloor() {
+    this.floorData = await home.getFollr()
+  }
+
   async onLoad(options) {
     this.loadSwiper()  // 加载轮播图数据
     this.loadCatItems()  // 加载分类导航
+    this.loadFloor()  // 获取楼层数据
   }
 }
 </script>
@@ -266,11 +194,11 @@ export default class Cart extends wepy.page {
 
 .floor-left image {
   width: 232rpx;
-  height: 400rpx;
+  height: 395rpx;
 }
 
 .floor-right {
-  width: 475rpx;
+  width: 483rpx;
   float: right;
 }
 
@@ -284,6 +212,7 @@ export default class Cart extends wepy.page {
 }
 
 .floor-body image {
-  margin: 10rpx;
+  margin-top: 10rpx;
+  margin-right: 10rpx;
 }
 </style>

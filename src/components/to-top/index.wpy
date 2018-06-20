@@ -1,0 +1,35 @@
+<template>
+	<view class="to_Top" @tap="handleTop">
+		^
+	</view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class topTop extends wepy.page {
+  methods = {
+    handleTop () {
+      wepy.pageScrollTo({
+        scrollTop: 0,
+        duration: 300
+      })
+    }
+  }
+}
+</script>
+
+<style>
+.to_Top {
+	width: 70rpx;
+	height: 70rpx;
+	color: #fff;
+	position: fixed;
+	right: 20rpx;
+	bottom: 30rpx;
+	font-size: 50rpx;
+	text-align: center;
+	border-radius: 35rpx;
+	background-color: rgba(0,0,0,.5);
+}
+</style>
