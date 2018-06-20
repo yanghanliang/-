@@ -1,0 +1,289 @@
+<template>
+    <view class="search-wrap">
+    <view class="searchbar">
+        <image class="search-img" src="/images/icon_search@2x.png"></image>
+        <text class="search-text">搜索</text>
+    </view>
+    </view>
+    <view class="swiper-wrap">
+    <swiper
+        indicator-dots
+        interval="2000"
+        indicator-color="rgba(255,255,255,.3)"
+        indicator-active-color="#fff"
+        autoplay="true">
+        <swiper-item
+        wx:for="{{ swiperData }}"
+        wx:key="item"
+        class="swiper-item-img">
+        <image mode="widthFix" src="{{ item.image_src }}"></image>
+        </swiper-item>
+    </swiper>
+    </view>
+    <!-- 导航栏 -->
+    <view class="nav-wrap">
+        <view class="nav-item" wx:for="{{ catItems }}" wx:key="image_src">
+            <navigator url="{{ item.navigator_url }}" open-type="{{ item.open_type }}">
+                <image src="{{ item.image_src }}"></image>
+            </navigator>
+        </view>
+    </view>
+    <!-- 楼层导航-start -->
+    <view class="floor">
+      <!-- 标题 -->
+      <view class="floor-head">
+        <image class="" src="../upload/pic_floor01_title.png"></image>
+      </view>
+      <!-- 主体 -->
+      <view class="floor-body">
+        <!-- 左侧大图 -->
+        <view class="floor-left">
+          <navigator url="">
+            <image src="../upload/pic_floor01_1@2x.png"></image> 
+          </navigator>
+        </view>
+        <!-- 右侧小图 -->
+        <view class="floor-right">
+          <navigator url="">
+            <image src="../upload/pic_floor01_2@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_3@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_4@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_5@2x.png"></image> 
+          </navigator>
+        </view>
+      </view>
+    </view>  
+    <!-- 楼层导航-end -->
+    <!-- 楼层导航-start -->
+    <view class="floor">
+      <!-- 标题 -->
+      <view class="floor-head">
+        <image class="" src="../upload/pic_floor01_title.png"></image>
+      </view>
+      <!-- 主体 -->
+      <view class="floor-body">
+        <!-- 左侧大图 -->
+        <view class="floor-left">
+          <navigator url="">
+            <image src="../upload/pic_floor01_1@2x.png"></image> 
+          </navigator>
+        </view>
+        <!-- 右侧小图 -->
+        <view class="floor-right">
+          <navigator url="">
+            <image src="../upload/pic_floor01_2@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_3@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_4@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_5@2x.png"></image> 
+          </navigator>
+        </view>
+      </view>
+    </view>  
+    <!-- 楼层导航-end -->
+    <!-- 楼层导航-start -->
+    <view class="floor">
+      <!-- 标题 -->
+      <view class="floor-head">
+        <image class="" src="../upload/pic_floor01_title.png"></image>
+      </view>
+      <!-- 主体 -->
+      <view class="floor-body">
+        <!-- 左侧大图 -->
+        <view class="floor-left">
+          <navigator url="">
+            <image src="../upload/pic_floor01_1@2x.png"></image> 
+          </navigator>
+        </view>
+        <!-- 右侧小图 -->
+        <view class="floor-right">
+          <navigator url="">
+            <image src="../upload/pic_floor01_2@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_3@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_4@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_5@2x.png"></image> 
+          </navigator>
+        </view>
+      </view>
+    </view>  
+    <!-- 楼层导航-end -->
+    <!-- 楼层导航-start -->
+    <view class="floor">
+      <!-- 标题 -->
+      <view class="floor-head">
+        <image class="" src="../upload/pic_floor01_title.png"></image>
+      </view>
+      <!-- 主体 -->
+      <view class="floor-body">
+        <!-- 左侧大图 -->
+        <view class="floor-left">
+          <navigator url="">
+            <image src="../upload/pic_floor01_1@2x.png"></image> 
+          </navigator>
+        </view>
+        <!-- 右侧小图 -->
+        <view class="floor-right">
+          <navigator url="">
+            <image src="../upload/pic_floor01_2@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_3@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_4@2x.png"></image> 
+          </navigator>
+          <navigator url="">
+            <image src="../upload/pic_floor01_5@2x.png"></image> 
+          </navigator>
+        </view>
+      </view>
+    </view>  
+    <!-- 楼层导航-end -->
+</template>
+<script>
+
+import wepy from 'wepy'
+import * as home from '../api/home'
+
+export default class Cart extends wepy.page {
+  data = {
+    swiperData: [],
+    catItems: []
+  };
+
+  methods = {
+
+  }
+
+  // 轮播图
+  async loadSwiper () {
+    this.swiperData = await home.getSwiper()
+    this.$apply()
+  }
+
+  // 加载分类导航
+  async loadCatItems () {
+    this.catItems = await home.getNavCats()
+    this.$apply()
+  }
+
+  async onLoad(options) {
+    this.loadSwiper()  // 加载轮播图数据
+    this.loadCatItems()  // 加载分类导航
+  }
+}
+</script>
+
+<style>
+/* pages/home/home.wxss */
+.search-wrap {
+  padding: 20rpx 16rpx;
+  background-color: #ff2d4a;
+}
+
+.searchbar {
+  height: 60rpx;
+  color: #bbb;
+  display: flex;
+  font-size: 24rpx;
+  align-items: center;
+  border-radius: 10rpx;
+  background-color: #fff;
+  justify-content: center;
+}
+
+.search-img {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.search-text {
+  margin-left: 16rpx;
+}
+
+.swiper-item-img {
+  width: 100%;
+}
+
+/*分类导航*/
+.nav-wrap {
+  display: flex;
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-item image {
+  width: 128rpx;
+  height: 128rpx;
+}
+
+/*楼层导航*/
+.floor {
+  width: 100%;
+  height: 500rpx;
+  margin-top: 29rpx;
+}
+
+.floor-head {
+  width: 100%;
+  height: 60rpx;
+  background-color: rgb(244, 244, 244);
+}
+
+.floor-head image {
+  width: 100%;
+  height: 60rpx;
+}
+
+.floor-body {
+  padding: 20rpx 16rpx;
+}
+
+.floor-left {
+  float: left;
+}
+
+.floor-left image {
+  width: 232rpx;
+  height: 400rpx;
+}
+
+.floor-right {
+  width: 475rpx;
+  float: right;
+}
+
+.floor-right navigator {
+  float: left;
+}
+
+.floor-right image {
+  width: 220rpx;
+  height: 188rpx;
+}
+
+.floor-body image {
+  margin: 10rpx;
+}
+</style>
